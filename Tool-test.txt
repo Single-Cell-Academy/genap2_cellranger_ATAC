@@ -1,0 +1,37 @@
+            ***** links to input data for 10X single-analysis and Seurat tutorials ****
+                                               ****
+
+***** Single-Cell ATACseq (10X Genomics) - from fastq to dimentionality reduction
+
+Fastq = https://support.10xgenomics.com/single-cell-atac/datasets/1.2.0/atac_v1_pbmc_5k
+
+Software = Cell Ranger ATAC 1.2.0 (https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/installation)
+
+Tutorial from cell ranger output to clustering = https://satijalab.org/signac/articles/pbmc_vignette.html
+
+
+
+****** Multiome (ARC) = scRNA + scATACseq (10X Genomics) - from fastq to dimentionality reduction
+
+Fastq = https://support.10xgenomics.com/single-cell-multiome-atac-gex/datasets/1.0.0/pbmc_unsorted_3k
+
+Software = Cell Ranger ARC 1.0.0 (https://support.10xgenomics.com/single-cell-multiome-atac-gex/software/pipelines/latest/installation)
+
+Tutorial from cell ranger output to clustering (PBMC - RNA & ATAC) = https://satijalab.org/seurat/v4.0/weighted_nearest_neighbor_analysis.html
+
+
+
+                ********** Pipeline implentation *********
+                                *******
+                      
+***** Galaxy
+
+
+
+***** NextFlow
+https://github.com/WarrenLab/single-cell
+https://figshare.com/articles/BICF_Cellranger_count_Analysis_Workflow/9702698
+https://nf-co.re/scrnaseq/1.0.0
+https://hub.docker.com/r/nfcore/demultiplex
+
+
