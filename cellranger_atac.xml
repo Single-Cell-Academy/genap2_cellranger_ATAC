@@ -1,0 +1,23 @@
+<tool id="cellranger_atac" name="Process 10x Genomics single-cell ATAC-seq data using CellRanger-ATAC." version="0.1.0" python_template_version="3.5">
+    <requirements>
+    </requirements>
+    <command detect_errors="exit_code"><![CDATA[
+        cellranger-atac count
+    ]]></command>
+    <inputs>
+    </inputs>
+    <outputs>
+    </outputs>
+    <help><![CDATA[
+
+    ]]></help>
+    <citations>
+        <citation type="bibtex">
+@misc{renameTODO,
+  author = 10x Genomics,
+  year = 2021,
+  title = CellRanger-ATAC,
+  url = {https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/fastq-input#ATACIntro},
+}</citation>
+    </citations>
+</tool>

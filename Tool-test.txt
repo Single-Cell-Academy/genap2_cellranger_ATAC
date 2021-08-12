@@ -4,6 +4,7 @@
 ***** Single-Cell ATACseq (10X Genomics) - from fastq to dimentionality reduction
 
 Fastq = https://support.10xgenomics.com/single-cell-atac/datasets/1.2.0/atac_v1_pbmc_5k
+small_fastq_files = https://support.10xgenomics.com/single-cell-atac/datasets/2.0.0/atac_pbmc_500_nextgem
 
 Software = Cell Ranger ATAC 1.2.0 (https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/installation)
 
