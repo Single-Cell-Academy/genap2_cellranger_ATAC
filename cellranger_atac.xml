@@ -1,15 +1,35 @@
-<tool id="cellranger_atac" name="Process 10x Genomics single-cell ATAC-seq data using CellRanger-ATAC." version="0.1.0" python_template_version="3.5">
+<tool id="cellranger_atac" name="CellRanger ATAC" version="0.1.0" python_template_version="3.5">
+    <description>performs processing of 10x single-cell ATAC-seq data.</description>
     <requirements>
     </requirements>
     <command detect_errors="exit_code"><![CDATA[
-        cellranger-atac count
+        mkdir ./fastq_files
+        #for $i, $s in enumerate($series)
+        && ln -s '${s.fastq_i1}' './fastq_files/${sample_name}_S1_L00${s.lane_number}_I1_001.fastq.gz'
+        && ln -s '${s.fastq_r1}' './fastq_files/${sample_name}_S1_L00${s.lane_number}_R1_001.fastq.gz'
+        && ln -s '${s.fastq_r2}' './fastq_files/${sample_name}_S1_L00${s.lane_number}_R2_001.fastq.gz'
+        && ln -s '${s.fastq_r3}' './fastq_files/${sample_name}_S1_L00${s.lane_number}_R3_001.fastq.gz'
+        #end for
+        ls * > output.txt> 
     ]]></command>
     <inputs>
+        <param name="sample_name" label="Specify your sample name (as defined by CellRanger software requirements, no whitespaces, use underscores '_' !):" type="text" multiple="false" optional="false"/> 
+        <repeat name="series" title="Series">
+            <param name="lane_number" label="Specify the lane number of these samples (as defined by CellRanger software requirements, no whitespaces, use underscores '_' !):" type="text" multiple="false" optional="false"/>
+            <param name="fastq_i1" label="Select the I1 fastq file (Dual index i7 read (optional)):" type="data" format="fastq.gz" multiple="false" optional="true"/> 
+            <param name="fastq_r1" label="Select the read1 (R1) fastq file (BC):" type="data" format="fastq.gz" multiple="false"/>
+            <param name="fastq_r2" label="Select the Dual index i5 read file (R2/I2):" type="data" format="fastq.gz" multiple="false"/>
+            <param name="fastq_r3" label="Select the read (R3) fastq file (DNA):" type="data" format="fastq.gz" multiple="false"/> 
+        </repeat>
     </inputs>
     <outputs>
+        <data name="barcodes" label="test" format="txt" from_work_dir="output.txt"/>
     </outputs>
     <help><![CDATA[
-
+        What is CellRanger ATAC? 
+        https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/what-is-cell-ranger-atac
+        
+        Naming convention of FASTQ files internally in Galaxy follows thes guidelines: https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/fastq-input#rightname
     ]]></help>
     <citations>
         <citation type="bibtex">

@@ -12,10 +12,9 @@ planemo tool_init --force \
   --help_from_command 'cellranger-atac'
   
   ## Test run with very small test data
-  
-   cellranger-atac count --id=sample345 \
-                        --reference= \
-                        --fastqs=/home/florian/GenAP2/test_datasets/cellranger_ATAC/atac_pbmc_500_nextgem_fastqs/100k_sub \
-                        --sample=test \
-                        --localcores=2 \
-                        --localmem=6
+  cellranger-atac count --id=sample345 \
+    --reference= \
+    --fastqs=/home/florian/GenAP2/test_datasets/cellranger_ATAC/atac_pbmc_500_nextgem_fastqs/100k_sub \
+    --sample=test \
+    --localcores=2 \
+    --localmem=6
