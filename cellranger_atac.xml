@@ -3,33 +3,73 @@
     <requirements>
     </requirements>
     <command detect_errors="exit_code"><![CDATA[
-        mkdir ./fastq_files
-        #for $i, $s in enumerate($series)
-        && ln -s '${s.fastq_i1}' './fastq_files/${sample_name}_S1_L00${s.lane_number}_I1_001.fastq.gz'
-        && ln -s '${s.fastq_r1}' './fastq_files/${sample_name}_S1_L00${s.lane_number}_R1_001.fastq.gz'
-        && ln -s '${s.fastq_r2}' './fastq_files/${sample_name}_S1_L00${s.lane_number}_R2_001.fastq.gz'
-        && ln -s '${s.fastq_r3}' './fastq_files/${sample_name}_S1_L00${s.lane_number}_R3_001.fastq.gz'
-        #end for
-        ls * > output.txt> 
+        mkdir ./fastq_dir &&
+        #for $i1 in $fastq_i1#  
+            ln -s $i1 ./fastq_dir/$i1.element_identifier;
+        #end for#
+
+        #for $r1 in $fastq_r1#
+            ln -s $r1 ./fastq_dir/$r1.element_identifier;
+        #end for#
+
+        #for $r2 in $fastq_r2#
+            ln -s $r2 ./fastq_dir/$r2.element_identifier;
+        #end for#
+
+        #for $r3 in $fastq_r3#
+            ln -s $r3 ./fastq_dir/$r3.element_identifier;
+        #end for#
+
+        /cellranger/cellranger-atac count --id $id --reference=/references/refdata-cellranger-arc-GRCh38-2020-A-2.0.0/ --fastqs ./fastq_dir --sample=$sample_name --localcores=1 --localmem=6
     ]]></command>
     <inputs>
-        <param name="sample_name" label="Specify your sample name (as defined by CellRanger software requirements, no whitespaces, use underscores '_' !):" type="text" multiple="false" optional="false"/> 
-        <repeat name="series" title="Series">
-            <param name="lane_number" label="Specify the lane number of these samples (as defined by CellRanger software requirements, no whitespaces, use underscores '_' !):" type="text" multiple="false" optional="false"/>
-            <param name="fastq_i1" label="Select the I1 fastq file (Dual index i7 read (optional)):" type="data" format="fastq.gz" multiple="false" optional="true"/> 
-            <param name="fastq_r1" label="Select the read1 (R1) fastq file (BC):" type="data" format="fastq.gz" multiple="false"/>
-            <param name="fastq_r2" label="Select the Dual index i5 read file (R2/I2):" type="data" format="fastq.gz" multiple="false"/>
-            <param name="fastq_r3" label="Select the read (R3) fastq file (DNA):" type="data" format="fastq.gz" multiple="false"/> 
-        </repeat>
+        <param type="data" name="fastq_i1" label="Select the I1 fastq file (Dual index i7 read (optional)):"  format="fastq.gz" multiple="true"/> 
+        <param type="data" name="fastq_r1" label="Select the read1 (R1) fastq file (BC):" format="fastq.gz" multiple="true"/>
+		<param type="data" name="fastq_r2" label="Select the Dual index i5 read file (R2/I2):" format="fastq.gz" multiple="true"/>
+        <param type="data" name="fastq_r3" label="Select the read (R3) fastq file (DNA):" format="fastq.gz" multiple="true"/> 
+        <param type="text" name="id" label="What is the sample ID?" optional="false"/>
+        <param type="text" name="sample_name" label="What is the sample name?" optional="false"/>        
     </inputs>
     <outputs>
-        <data name="barcodes" label="test" format="txt" from_work_dir="output.txt"/>
+        <data name="web_summary.html" label="CellRanger web summary report" format="html" from_work_dir="./$id/outs/web_summary.html"/> 
+        <data name="Cloupe file" label="cloupe_file" format="data" from_work_dir="$id/outs/cloupe.cloupe"/>
+        <collection type="list" label="Filtered peak bc matrix" name="filtered_peak_bc_matrix">
+            <data name="barcodes" label="CellRanger barcodes file" format="txt" from_work_dir="$id/outs/filtered_peak_bc_matrix/barcodes.tsv"/>
+            <data name="peaks" label="CellRanger peaks" format="bed" from_work_dir="$id/outs/filtered_peak_bc_matrix/peaks.bed"/>
+            <data name="matrix" label="CellRanger BC matrix" format="mtx" from_work_dir="$id/outs/filtered_peak_bc_matrix/matrix.mtx"/>
+        </collection>
+        <data name="Filtered peak BC matrix (H5)" label="filtered_peak_bc_matrix_h5" format="h5" from_work_dir="$id/outs/filtered_peak_bc_matrix.h5"/>
+        <collection type="list" label="Raw peak bc matrix" name="raw_peak_bc_matrix">
+            <data name="barcodes" label="Raw CellRanger barcodes file" format="txt" from_work_dir="$id/outs/raw_peak_bc_matrix/barcodes.tsv"/>
+            <data name="peaks" label="Raw CellRanger peaks" format="bed" from_work_dir="$id/outs/raw_peak_bc_matrix/peaks.bed"/>
+            <data name="matrix" label="Raw CellRanger matrix" format="mtx" from_work_dir="$id/outs/raw_peak_bc_matrix/matrix.mtx"/>
+        </collection>
+        <data name="Raw peak BC matrix (H5)" label="raw_peak_bc_matrix_h5" format="h5" from_work_dir="$id/outs/raw_peak_bc_matrix.h5"/>
+        <collection type="list" label="" name="">
+            <data name="fragments_file" label="Fragments file" format="bgzip" from_work_dir="$id/outs/fragments.tsv.gz"/>
+            <data name="fragments_index" label="Fragments file index (tbi)" format="text" from_work_dir="$id/outs/fragments.tsv.gz.tbi"/>
+        </collection>
+        <collection type="list" label="BAM files" name="">
+            <data name="possorted_bam.bam" label="Possorted BAM file" format="bam" from_work_dir="$id/outs/possorted_bam.bam"/>
+            <data name="possorted_bam.bai" label="BAM index file" format="bai" from_work_dir="$id/outs/possorted_bam.bam.bai"/>
+        </collection>
+        <collection type="list" label="Additional CellRanger output files" name="additional_outfiles">
+            <data name="peak_annotation.tsv" label="Peak annotation" format="tsv" from_work_dir="$id/outs/peak_annotation.tsv"/>
+            <data name="peak_motif_mapping.bed" label="Peak motif mapping file" format="bed" from_work_dir="$id/outs/peak_motif_mapping.bed"/>
+            <data name="peaks.bed" label="Peaks bed file" format="bed" from_work_dir="$id/outs/peaks.bed"/>
+            <data name="singlecell.csv" label="SingleCell csv file" format="csv" from_work_dir="$id/outs/singlecell.csv"/>
+            <data name="summary.csv" label="Summary file" format="csv" from_work_dir="$id/outs/summary.csv"/>
+        </collection>
     </outputs>
     <help><![CDATA[
         What is CellRanger ATAC? 
         https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/what-is-cell-ranger-atac
         
         Naming convention of FASTQ files internally in Galaxy follows thes guidelines: https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/fastq-input#rightname
+
+        To use this tool, we assume that cellranger-atac (v.2.0.0) is available to Galaxy on the system, via the command cellranger-atac. Unfortunately at this point, we cannot include Cellranger-ATAC as 
+        part of this wrapper due to Licensing and distribution limitations. For more information on how to install CellRanger-ATAC on your system, please see : 
+        https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/installation
     ]]></help>
     <citations>
         <citation type="bibtex">
