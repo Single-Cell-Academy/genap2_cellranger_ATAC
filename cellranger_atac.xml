@@ -31,13 +31,13 @@
         <param type="text" name="sample_name" label="What is the sample name?" optional="false"/>        
     </inputs>
     <outputs>
-        <data name="singlecell.csv" label="Per-barcode fragment counts and metrics" format="csv" from_work_dir='{$sample_ID}/outs/singlecell.csv'/>
+	    <data name="singlecell.csv" label="Per-barcode fragment counts and metrics" format="csv" from_work_dir='${sample_ID}/outs/singlecell.csv'/>
         <collection type="list" label="BAM files" name="">
             <data name="possorted_bam.bam" label="Position sorted BAM file" format="bam" from_work_dir="test/outs/possorted_bam.bam"/>
             <data name="possorted_bam.bai" label="Position sorted BAM index" format="bai" from_work_dir="test/outs/possorted_bam.bam.bai"/>
         </collection>
         <data name="summary.json" label="Summary of all data metrics" format="json" from_work_dir='test/outs/summary.json'/> 
-	    <data name="web_summary.html" label="HTML file summarizing data and analysis" format="html" from_work_dir='{$sample_ID}/outs/web_summary.html'/> 
+	<data name="web_summary.html" label="HTML file summarizing data and analysis" format="html" from_work_dir='${sample_ID}/outs/web_summary.html'/> 
         <collection type="list" label="Filtered peak bc matrix" name="filtered_peak_bc_matrix">
             <data name="barcodes" label="CellRanger barcodes file" format="txt" from_work_dir='test/outs/filtered_peak_bc_matrix/barcodes.tsv'/>
             <data name="peaks" label="Bed file of all called peak locations" format="bed" from_work_dir='test/outs/filtered_peak_bc_matrix/peaks.bed'/>
