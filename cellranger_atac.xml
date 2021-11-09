@@ -37,12 +37,13 @@
         </collection>
         <data name="summary.json" label="Summary of all data metrics" format="json" from_work_dir='cellranger/outs/summary.json'/> 
 	    <data name="web_summary.html" label="CellRanger web summary report" format="html" from_work_dir='cellranger/outs/web_summary.html'/> 
-		<data name="peaks" label="CellRanger peaks" format="bed" from_work_dir='cellranger/outs/filtered_peak_bc_matrix/peaks.bed'/>
         <collection type="list" label="Filtered peak bc matrix" name="filtered_peak_bc_matrix">
-		<data name="barcodes" label="CellRanger barcodes file" format="txt" from_work_dir='cellranger/outs/filtered_peak_bc_matrix/barcodes.tsv'/>
+            <data name="barcodes" label="CellRanger barcodes file" format="txt" from_work_dir='cellranger/outs/filtered_peak_bc_matrix/barcodes.tsv'/>
+            <data name="peaks" label="CellRanger peaks" format="bed" from_work_dir='cellranger/outs/filtered_peak_bc_matrix/peaks.bed'/>
+        </collection>
 	    <data name="Raw peak BC matrix (H5)" label="raw_peak_bc_matrix_h5" format="h5" from_work_dir='cellranger/outs/raw_peak_bc_matrix.h5'/>
         <data name="Filtered peak BC matrix (H5)" label="filtered_peak_bc_matrix_h5" format="h5" from_work_dir='cellranger/outs/filtered_peak_bc_matrix.h5'/>
-        <collection type="list" label="" name="fragments">
+        <collection type="list" label="Fragment files" name="fragments">
             <data name="fragments_file" label="Fragments file" format="bgzip" from_work_dir='cellranger/outs/fragments.tsv.gz'/>
             <data name="fragments_index" label="Fragments file index (tbi)" format="text" from_work_dir='cellranger/outs/fragments.tsv.gz.tbi'/>
         </collection>
@@ -52,7 +53,6 @@
         <data name="peak_annotation.tsv" label="Peak annotation" format="tsv" from_work_dir='cellranger/outs/peak_annotation.tsv'/>
         <data name="peak_motif_mapping.bed" label="Peak motif mapping file" format="bed" from_work_dir='cellranger/outs/peak_motif_mapping.bed'/>
 		<data name="matrix" label="CellRanger BC matrix" format="mtx" from_work_dir='cellranger/outs/filtered_peak_bc_matrix/matrix.mtx'/>
-        </collection>
         <collection type="list" label="Raw peak bc matrix" name="raw_peak_bc_matrix">
 		    <data name="barcodes" label="Raw CellRanger barcodes file" format="txt" from_work_dir='cellranger/outs/raw_peak_bc_matrix/barcodes.tsv'/>
 		    <data name="peaks" label="Raw CellRanger peaks" format="bed" from_work_dir='cellranger/outs/raw_peak_bc_matrix/peaks.bed'/>
