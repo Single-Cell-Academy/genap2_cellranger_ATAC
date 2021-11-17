@@ -19,44 +19,43 @@
         #for $r3 in $fastq_r3#
             ln -s $r3 ./fastq_dir/$r3.element_identifier;
 	#end for#
-	    /cellranger/cellranger-atac count --id=test --reference=/references/refdata-cellranger-arc-GRCh38-2020-A-2.0.0/ --fastqs ./fastq_dir --sample=$sample_name --localcores=8 --localmem=80 --disable-ui
+	    /cellranger/cellranger-atac count --id=cellranger_atac --reference=/references/refdata-cellranger-arc-GRCh38-2020-A-2.0.0/ --fastqs ./fastq_dir --sample=$sample_name --localcores=8 --localmem=80 --disable-ui
     ]]></command>
     <inputs>
         <param type="data" name="fastq_i1" label="Select the I1 fastq file (Dual index i7 read (optional)):"  format="fastq.gz" multiple="true"/> 
         <param type="data" name="fastq_r1" label="Select the read1 (R1) fastq file (BC):" format="fastq.gz" multiple="true"/>
 		<param type="data" name="fastq_r2" label="Select the Dual index i5 read file (R2/I2):" format="fastq.gz" multiple="true"/>
-        <param type="data" name="fastq_r3" label="Select the read (R3) fastq file (DNA):" format="fastq.gz" multiple="true"/> 
-        <param type="text" name="sample_ID" value="cellranger_atac" label="What is the sample ID?" optional="false"/>
+        <param type="data" name="fastq_r3" label="Select the read (R3) fastq file (DNA):" format="fastq.gz" multiple="true"/>
         <param type="text" name="sample_name" label="What is the sample name?" optional="false"/>        
     </inputs>
     <outputs>
-	    <data name="singlecell.csv" label="Per-barcode fragment counts and metrics" format="csv" from_work_dir="test/outs/singlecell.csv" />
+	    <data name="Per-barcode fragment counts and metrics" label="singlecell.csv" format="csv" from_work_dir="cellranger_atac/outs/singlecell.csv" />
         <collection type="list" label="BAM files" name="">
-            <data name="possorted_bam.bam" label="Position sorted BAM file" format="bam" from_work_dir="test/outs/possorted_bam.bam"/>
-            <data name="possorted_bam.bai" label="Position sorted BAM index" format="bai" from_work_dir="test/outs/possorted_bam.bam.bai"/>
+            <data name="Position sorted BAM file" label="possorted_bam.bam" format="bam" from_work_dir="cellranger_atac/outs/possorted_bam.bam"/>
+            <data name="Position sorted BAM index" label="possorted_bam.bai" format="bai" from_work_dir="cellranger_atac/outs/possorted_bam.bam.bai"/>
         </collection>
-        <data name="summary.json" label="Summary of all data metrics" format="json" from_work_dir='test/outs/summary.json'/> 
-	<data name="web_summary.html" label="HTML file summarizing data and analysis" format="html" from_work_dir="test/outs/web_summary.html" /> 
+        <data name="Summary of all data metrics" label="summary.json" format="json" from_work_dir='cellranger_atac/outs/summary.json'/> 
+	<data name="HTML file summarizing data and analysis" label="web_summary.html" format="html" from_work_dir="cellranger_atac/outs/web_summary.html" /> 
         <collection type="list" label="Filtered peak bc matrix" name="filtered_peak_bc_matrix">
-            <data name="barcodes" label="CellRanger barcodes file" format="txt" from_work_dir='test/outs/filtered_peak_bc_matrix/barcodes.tsv'/>
-            <data name="peaks" label="Bed file of all called peak locations" format="bed" from_work_dir='test/outs/filtered_peak_bc_matrix/peaks.bed'/>
+            <data name="CellRanger barcodes file" label="barcodes" format="tsv" from_work_dir='cellranger_atac/outs/filtered_peak_bc_matrix/barcodes.tsv'/>
+            <data name="Bed file of all called peak locations" label="peaks" format="bed" from_work_dir='cellranger_atac/outs/filtered_peak_bc_matrix/peaks.bed'/>
         </collection>
-	    <data name="Raw peak BC matrix (H5)" label="Raw peak barcode matrix in hdf5 format" format="h5" from_work_dir='test/outs/raw_peak_bc_matrix.h5'/>
-        <data name="Filtered peak BC matrix (H5)" label="Filtered peak barcode matrix in hdf5 format" format="h5" from_work_dir='test/outs/filtered_peak_bc_matrix.h5'/>
+	    <data name="Raw peak barcode matrix in hdf5 format" label="raw_peak_bc_matrix " format="h5" from_work_dir='cellranger_atac/outs/raw_peak_bc_matrix.h5'/>
+        <data name="Filtered peak barcode matrix in hdf5 format" label="filtered_peak_bc_matrix" format="h5" from_work_dir='cellranger_atac/outs/filtered_peak_bc_matrix.h5'/>
         <collection type="list" label="Fragment files" name="fragments">
-            <data name="fragments_file" label="Barcoded and aligned fragment file" format="bgzip" from_work_dir='test/outs/fragments.tsv.gz'/>
-            <data name="fragments_index" label="Fragments file index (tbi)" format="text" from_work_dir='test/outs/fragments.tsv.gz.tbi'/>
+            <data name="Barcoded and aligned fragment file" label="fragments" format="bgzip" from_work_dir='cellranger_atac/outs/fragments.tsv.gz'/>
+            <data name="Fragments file index (tbi)" label="fragments_index" format="text" from_work_dir='cellranger_atac/outs/fragments.tsv.gz.tbi'/>
         </collection>
-        <data name="filtered_tf_bc_matrix.h5" label="Filtered tf barcode matrix in hdf5 format" format="h5" from_work_dir='test/outs/filtered_tf_bc_matrix.h5'/>
-        <data name="Cloupe file" label="cloupe_file" format="data" from_work_dir='test/outs/cloupe.cloupe'/>
-        <data name="summary.csv" label=" csv summarizing important metrics and values" format="csv" from_work_dir='test/outs/summary.csv'/>
-        <data name="peak_annotation.tsv" label="Annotation of peaks with genes" format="tsv" from_work_dir='test/outs/peak_annotation.tsv'/>
-        <data name="peak_motif_mapping.bed" label="Peak-motif associations" format="bed" from_work_dir='test/outs/peak_motif_mapping.bed'/>
-		<data name="matrix" label="Filtered CellRanger BC matrix" format="mtx" from_work_dir='test/outs/filtered_peak_bc_matrix/matrix.mtx'/>
+        <data name="Filtered tf barcode matrix in hdf5 format" label="filtered_tf_bc_matrix" format="h5" from_work_dir='cellranger_atac/outs/filtered_tf_bc_matrix.h5'/>
+        <data name="Cloupe file" label="cloupe" format="data" from_work_dir='cellranger_atac/outs/cloupe.cloupe'/>
+        <data name="csv summarizing important metrics and values" label="summary" format="csv" from_work_dir='cellranger_atac/outs/summary.csv'/>
+        <data name="Annotation of peaks with genes" label="peak_annotation" format="tsv" from_work_dir='cellranger_atac/outs/peak_annotation.tsv'/>
+        <data name="Peak-motif associations" label="peak_motif_mapping" format="bed" from_work_dir='cellranger_atac/outs/peak_motif_mapping.bed'/>
+		<data name="Filtered CellRanger BC matrix" label="matrix" format="mtx" from_work_dir='cellranger_atac/outs/filtered_peak_bc_matrix/matrix.mtx'/>
         <collection type="list" label="Raw peak bc matrix" name="raw_peak_bc_matrix">
-		    <data name="barcodes" label="Raw CellRanger barcodes file" format="txt" from_work_dir='test/outs/raw_peak_bc_matrix/barcodes.tsv'/>
-		    <data name="peaks" label="Raw CellRanger peaks" format="bed" from_work_dir='test/outs/raw_peak_bc_matrix/peaks.bed'/>
-		    <data name="matrix" label="Raw CellRanger matrix" format="mtx" from_work_dir='test/outs/raw_peak_bc_matrix/matrix.mtx'/>
+		    <data name="Raw CellRanger barcodes file" label="barcodes" format="txt" from_work_dir='cellranger_atac/outs/raw_peak_bc_matrix/barcodes.tsv'/>
+		    <data name="Raw CellRanger peaks" label="peaks" format="bed" from_work_dir='cellranger_atac/outs/raw_peak_bc_matrix/peaks.bed'/>
+		    <data name="Raw CellRanger matrix" label="matrix" format="mtx" from_work_dir='cellranger_atac/outs/raw_peak_bc_matrix/matrix.mtx'/>
         </collection>
     </outputs>
     <help><![CDATA[
