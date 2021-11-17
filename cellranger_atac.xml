@@ -33,14 +33,14 @@
     <outputs>
 	    <data name="Per-barcode fragment counts and metrics" label="singlecell.csv  " format="csv" from_work_dir="cellranger_atac/outs/singlecell.csv" />
         <collection type="list" label="BAM files" name="">
-            <data name="Position sorted BAM file" label="possorted_bam.bam" format="bam" from_work_dir="cellranger_atac/outs/possorted_bam.bam"/>
-            <data name="Position sorted BAM index" label="possorted_bam.bai" format="bai" from_work_dir="cellranger_atac/outs/possorted_bam.bam.bai"/>
+            <data name="possorted_bam.bam" label="possorted_bam.bam" format="bam" from_work_dir="cellranger_atac/outs/possorted_bam.bam"/>
+            <data name="possorted_bam.bai" label="possorted_bam.bai" format="bai" from_work_dir="cellranger_atac/outs/possorted_bam.bam.bai"/>
         </collection>
         <data name="Summary of all data metrics" label="summary.json" format="json" from_work_dir='cellranger_atac/outs/summary.json'/> 
-	<data name="HTML file summarizing data and analysis" label="web_summary.html" format="html" from_work_dir="cellranger_atac/outs/web_summary.html" /> 
+	    <data name="HTML file summarizing data and analysis" label="web_summary.html" format="html" from_work_dir="cellranger_atac/outs/web_summary.html" /> 
         <collection type="list" label="Filtered peak bc matrix" name="filtered_peak_bc_matrix">
-            <data name="CellRanger barcodes file" label="barcodes.tsv" format="tsv" from_work_dir='cellranger_atac/outs/filtered_peak_bc_matrix/barcodes.tsv'/>
-            <data name="Bed file of all called peak locations" label="peaks.bed" format="bed" from_work_dir='cellranger_atac/outs/filtered_peak_bc_matrix/peaks.bed'/>
+            <data name="barcodes.tsv" label="barcodes.tsv" format="tsv" from_work_dir='cellranger_atac/outs/filtered_peak_bc_matrix/barcodes.tsv'/>
+            <data name="peaks.bed" label="peaks.bed" format="bed" from_work_dir='cellranger_atac/outs/filtered_peak_bc_matrix/peaks.bed'/>
         </collection>
 	    <data name="Raw peak barcode matrix in hdf5 format" label="raw_peak_bc_matrix.h5" format="h5" from_work_dir='cellranger_atac/outs/raw_peak_bc_matrix.h5'/>
         <data name="Filtered peak barcode matrix in hdf5 format" label="filtered_peak_bc_matrix.h5" format="h5" from_work_dir='cellranger_atac/outs/filtered_peak_bc_matrix.h5'/>
