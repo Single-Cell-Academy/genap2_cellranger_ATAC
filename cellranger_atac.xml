@@ -4,7 +4,7 @@
     </requirements>
     <command detect_errors="exit_code"><![CDATA[
         mkdir ./fastq_dir &&
-        #for $i1 in $fastq_i1#  
+        #for $i1 in $fastq_i1#
             ln -s $i1 ./fastq_dir/$i1.element_identifier;
         #end for#
 
@@ -19,13 +19,15 @@
         #for $r3 in $fastq_r3#
             ln -s $r3 ./fastq_dir/$r3.element_identifier;
 	#end for#
-	    /cellranger/cellranger-atac count --id=cellranger_atac --reference=/references/refdata-cellranger-arc-GRCh38-2020-A-2.0.0/ --fastqs ./fastq_dir --sample=$sample_name --localcores=8 --localmem=80 --disable-ui
+	    /cellranger/cellranger-atac count --id=$sample_ID --reference=/references/refdata-cellranger-arc-GRCh38-2020-A-2.0.0/ --fastqs ./fastq_dir --sample=$sample_name --localcores=8 --localmem=80 --disable-ui &&
+        mv $sample_ID cellranger_atac
     ]]></command>
     <inputs>
         <param type="data" name="fastq_i1" label="Select the I1 fastq file (Dual index i7 read (optional)):"  format="fastq.gz" multiple="true"/> 
         <param type="data" name="fastq_r1" label="Select the read1 (R1) fastq file (BC):" format="fastq.gz" multiple="true"/>
 		<param type="data" name="fastq_r2" label="Select the Dual index i5 read file (R2/I2):" format="fastq.gz" multiple="true"/>
         <param type="data" name="fastq_r3" label="Select the read (R3) fastq file (DNA):" format="fastq.gz" multiple="true"/>
+        <param type="text" name="sample_ID" label="What is the sample ID? (no spaces or special characters! example: my_sample)" optional="false"/>        
         <param type="text" name="sample_name" label="What is the sample name?" optional="false"/>        
     </inputs>
     <outputs>
@@ -43,8 +45,8 @@
 	    <data name="Raw peak barcode matrix in hdf5 format" label="raw_peak_bc_matrix.h5" format="h5" from_work_dir='cellranger_atac/outs/raw_peak_bc_matrix.h5'/>
         <data name="Filtered peak barcode matrix in hdf5 format" label="filtered_peak_bc_matrix.h5" format="h5" from_work_dir='cellranger_atac/outs/filtered_peak_bc_matrix.h5'/>
         <collection type="list" label="Fragment files" name="fragments">
-            <data name="Barcoded and aligned fragment file" label="fragments.bgzip" format="bgzip" from_work_dir='cellranger_atac/outs/fragments.tsv.gz'/>
-            <data name="Fragments file index (tbi)" label="fragments_index.text" format="text" from_work_dir='cellranger_atac/outs/fragments.tsv.gz.tbi'/>
+            <data name="fragments.bgzip" label="fragments.bgzip" format="bgzip" from_work_dir='cellranger_atac/outs/fragments.tsv.gz'/>
+            <data name="fragments_index.text" label="fragments_index.text" format="text" from_work_dir='cellranger_atac/outs/fragments.tsv.gz.tbi'/>
         </collection>
         <data name="Filtered tf barcode matrix in hdf5 format" label="filtered_tf_bc_matrix.h5" format="h5" from_work_dir='cellranger_atac/outs/filtered_tf_bc_matrix.h5'/>
         <data name="Cloupe file" label="cloupe.cloupe" format="data" from_work_dir='cellranger_atac/outs/cloupe.cloupe'/>
@@ -53,10 +55,10 @@
         <data name="Peak-motif associations" label="peak_motif_mapping.bed" format="bed" from_work_dir='cellranger_atac/outs/peak_motif_mapping.bed'/>
 		<data name="Filtered CellRanger BC matrix" label="matrix.mtx" format="mtx" from_work_dir='cellranger_atac/outs/filtered_peak_bc_matrix/matrix.mtx'/>
         <collection type="list" label="Raw peak bc matrix" name="raw_peak_bc_matrix">
-		    <data name="Raw CellRanger barcodes file" label="barcodes.txt" format="txt" from_work_dir='cellranger_atac/outs/raw_peak_bc_matrix/barcodes.tsv'/>
-		    <data name="Raw CellRanger peaks" label="peaks.bed" format="bed" from_work_dir='cellranger_atac/outs/raw_peak_bc_matrix/peaks.bed'/>
-		    <data name="Raw CellRanger matrix" label="matrix.mtx" format="mtx" from_work_dir='cellranger_atac/outs/raw_peak_bc_matrix/matrix.mtx'/>
-        </collection>
+		    <data name="barcodes.txt" label="barcodes.txt" format="txt" from_work_dir='cellranger_atac/outs/raw_peak_bc_matrix/barcodes.tsv'/>
+		    <data name="peaks.bed" label="peaks.bed" format="bed" from_work_dir='cellranger_atac/outs/raw_peak_bc_matrix/peaks.bed'/>
+		    <data name="matrix.mtx" label="matrix.mtx" format="mtx" from_work_dir='cellranger_atac/outs/raw_peak_bc_matrix/matrix.mtx'/>
+        </collection>   
     </outputs>
     <help><![CDATA[
         What is CellRanger ATAC? 
