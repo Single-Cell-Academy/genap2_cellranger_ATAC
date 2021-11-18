@@ -20,7 +20,7 @@
             ln -s $r3 ./fastq_dir/$r3.element_identifier;
 	    #end for#
 	    /cellranger/cellranger-atac count --id=$sample_ID --reference=/references/refdata-cellranger-arc-GRCh38-2020-A-2.0.0/ --fastqs ./fastq_dir --sample=$sample_name --localcores=8 --localmem=80 --disable-ui &&
-        mv $sample_ID cellranger_atac
+        ln -s $sample_ID cellranger_atac
     ]]></command>
     <inputs>
         <param type="data" name="fastq_i1" label="Select the I1 fastq file (Dual index i7 read (optional)):"  format="fastq.gz" multiple="true"/> 
