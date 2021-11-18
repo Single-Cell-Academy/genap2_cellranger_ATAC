@@ -3,7 +3,6 @@
 Make sure you have a working planemo installation. To find out how to install planemo, check here: https://planemo.readthedocs.io/en/latest/installation.html
 
 ## Generate galaxy tool xml using planemo tool_init
-
 planemo tool_init --force \
   --id 'cellranger_atac' \
   --name 'Process 10x Genomics single-cell ATAC-seq data using CellRanger-ATAC.'\

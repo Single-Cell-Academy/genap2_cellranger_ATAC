@@ -19,7 +19,7 @@
         #for $r3 in $fastq_r3#
             ln -s $r3 ./fastq_dir/$r3.element_identifier;
 	    #end for#
-	    /cellranger/cellranger-atac count --id=$sample_ID --reference=/references/refdata-cellranger-arc-GRCh38-2020-A-2.0.0/ --fastqs ./fastq_dir --sample=$sample_name --localcores=8 --localmem=80 --disable-ui &&
+	    cellranger-atac count --id=$sample_ID --reference=/references/refdata-cellranger-arc-GRCh38-2020-A-2.0.0/ --fastqs ./fastq_dir --sample=$sample_name --localcores=8 --localmem=80 --disable-ui &&
         ln -s $sample_ID cellranger_atac
     ]]></command>
     <inputs>
@@ -65,6 +65,11 @@
         https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/what-is-cell-ranger-atac
         
         Naming convention of FASTQ files internally in Galaxy follows thes guidelines: https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/using/fastq-input#rightname
+
+        Installation:
+         1) Install this wrapper via the Galaxy toolshed. 
+         2) CellRanger-ATAC (v2.0.0) is required for this r
+    
 
         To use this tool, we assume that cellranger-atac (v.2.0.0) is available to Galaxy on the system, via the command cellranger-atac. Unfortunately at this point, we cannot include Cellranger-ATAC as 
         part of this wrapper due to Licensing and distribution limitations. For more information on how to install CellRanger-ATAC on your system, please see : 
