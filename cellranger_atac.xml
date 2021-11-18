@@ -31,7 +31,7 @@
         <param type="text" name="sample_name" label="What is the sample name?" optional="false"/>        
     </inputs>
     <outputs>
-	    <data name="Per-barcode fragment counts and metrics" label="singlecell.csv  " format="csv" from_work_dir="cellranger_atac/outs/singlecell.csv" />
+	    <data name="Per-barcode fragment counts and metrics" label="singlecell.csv" format="csv" from_work_dir="cellranger_atac/outs/singlecell.csv"/>
         <collection type="list" label="BAM files" name="">
             <data name="possorted_bam.bam" label="possorted_bam.bam" format="bam" from_work_dir="cellranger_atac/outs/possorted_bam.bam"/>
             <data name="possorted_bam.bai" label="possorted_bam.bai" format="bai" from_work_dir="cellranger_atac/outs/possorted_bam.bam.bai"/>
