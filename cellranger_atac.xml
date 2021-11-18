@@ -45,8 +45,8 @@
 	    <data name="Raw peak barcode matrix in hdf5 format" label="raw_peak_bc_matrix.h5" format="h5" from_work_dir='cellranger_atac/outs/raw_peak_bc_matrix.h5'/>
         <data name="Filtered peak barcode matrix in hdf5 format" label="filtered_peak_bc_matrix.h5" format="h5" from_work_dir='cellranger_atac/outs/filtered_peak_bc_matrix.h5'/>
         <collection type="list" label="Fragment files" name="fragments">
-            <data name="fragments.bgzip" label="fragments.bgzip" format="bgzip" from_work_dir='cellranger_atac/outs/fragments.tsv.gz'/>
-            <data name="fragments_index.text" label="fragments_index.text" format="text" from_work_dir='cellranger_atac/outs/fragments.tsv.gz.tbi'/>
+            <data name="fragments.tsv.gz" label="fragments.tsv.gz" format="bgzip" from_work_dir='cellranger_atac/outs/fragments.tsv.gz'/>
+            <data name="fragments.tsv.gz.tbi" label="fragments.tsv.gz.tbi" format="text" from_work_dir='cellranger_atac/outs/fragments.tsv.gz.tbi'/>
         </collection>
         <data name="Filtered tf barcode matrix in hdf5 format" label="filtered_tf_bc_matrix.h5" format="h5" from_work_dir='cellranger_atac/outs/filtered_tf_bc_matrix.h5'/>
         <data name="Cloupe file" label="cloupe.cloupe" format="data" from_work_dir='cellranger_atac/outs/cloupe.cloupe'/>
