@@ -59,6 +59,8 @@
         </collection>   
     </outputs>
     <help><![CDATA[
+	Disclaimer: This wrapper for CellRanger-ATAC is not developed or supported by 10x Genomics. This wrapper was written by scientists at GenAP to help facilitate usage of CellRanger tools inside of Galaxy. Please find the full, official 10x Genomics licensing information at : https://support.10xgenomics.com/docs/license.
+
         What is CellRanger ATAC? 
         https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/what-is-cell-ranger-atac
         
