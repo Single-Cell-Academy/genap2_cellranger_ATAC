@@ -68,7 +68,7 @@
 
         Installation:
          1) Install this wrapper via the Galaxy toolshed. 
-         2) CellRanger-ATAC (v2.0.0) is required for this r
+         2) CellRanger-ATAC (v2.0.0) is required for this wrapper and should be installed separately (see below).
     
 
         To use this tool, we assume that cellranger-atac (v.2.0.0) is available to Galaxy on the system, via the command cellranger-atac. Unfortunately at this point, we cannot include Cellranger-ATAC as 
